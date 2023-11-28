@@ -1,0 +1,24 @@
+{
+  "position": {
+    "position": "Chức vụ",
+    "positionInfo": "Thông tin chức vụ",
+    "updatePosition": "Cập nhật chức vụ",
+    "createPosition": "Thêm chức vụ",
+    "positionName": "Tên chức vụ",
+    "description": "Mô tả",
+    "createdDate": "Ngày tạo",
+    "list": "Danh sách chức vụ sử dụng trong hệ thống",
+    "search": "Tìm kiếm chức vụ",
+    "message": {
+      "createPositionSuccess": "Tạo mới chức vụ thành công",
+      "createPositionFail": "Tạo mới chức vụ không thành công",
+      "updatePositionSuccess": "Cập nhật chức vụ thành công",
+      "updatePositionFail": "Cập nhật chức vụ không thành công",
+      "deleteSuccess": "Xóa chức vụ thành công",
+      "positionEmpty": "Chức vụ không được để trống",
+      "enterPositionName": "Nhập tên chức vụ",
+      "enterDescription": "Nhập mô tả cho chức vụ",
+      "warnDelete": "Bạn có muốn xóa chức vụ không?"
+    }
+  }
+}

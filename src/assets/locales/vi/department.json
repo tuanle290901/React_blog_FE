@@ -1,0 +1,33 @@
+{
+  "department": {
+    "name": "Tên phòng ban",
+    "code": "Mã phòng ban",
+    "phone-number": "Số điện thoại",
+    "email": "Email liên hệ",
+    "address": "Địa chỉ",
+    "contactPhoneNumber": "Số điện thoại liên hệ",
+    "contactEmail": "Email liên hệ",
+    "publishDate": "Ngày thành lập",
+    "actions": "Hành động",
+    "departmentAdd": "Thêm mới phòng ban",
+    "add": "Thêm phòng ban",
+    "departmentUpdate": "Cập nhật thông tin phòng ban",
+    "pleaseEnterSearch": "Mời nhập thông tin tìm kiếm",
+    "please-insert-input": "Mời nhập thông tin ",
+    "alter-notification": {
+      "do-not-leave-spaces-special-characters-vietnamese-accents": "Không được Kí tự đặc biệt, dấu cách, chữ tiếng Việt có dấu.",
+      "do-not-leave-spaces-special-accents": "Không được sử Kí tự đặc biệt, dấu cách.",
+      "do-not-email-accents": "Email không hợp lệ hoặc thừa khoảng trắng",
+      "do-not-phone-accents": "Số điện thoại không hợp lệ"
+    },
+    "menber": "Thành viên",
+    "manager": "Quản lý",
+    "tooltip": {
+      "update": "Cập nhật thông tin phòng ban",
+      "delete": "Xóa phòng ban",
+      "member": "Danh sách cán bộ quản lý"
+    },
+    "confirmDeleteDevice": "Bạn có chắc chắn muốn xóa không?",
+    "confirmDeleteDeviceTitle": "Xóa phòng ban: {{departmentName}}"
+  }
+}

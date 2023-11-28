@@ -1,0 +1,13 @@
+{
+  "dashboard": {
+    "title": "Bài viết mới",
+    "titleAmthuc": "Blog ẩm thực",
+    "titleGiaitri": "Blog giải trí",
+    "titleCongnghe": "Blog công nghệ",
+    "titleThethao": "Blog thể thao",
+    "titleHot": "Bài viết nổi bật",
+    "exportData": "Xuất dữ liệu",
+    "fullname": "Họ tên"
+
+  }
+}

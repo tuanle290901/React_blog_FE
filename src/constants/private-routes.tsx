@@ -11,9 +11,9 @@ import TagCongnghe from '~/pages/bogBytag/congnghe/TagCongnghe.tsx'
 import BlogDetail from '~/pages/Dashboard/component/BlogDetail.tsx'
 import TagGiaitri from '~/pages/bogBytag/giaitri/TagGiaitri.tsx'
 import TagThethao from '~/pages/bogBytag/thethao/TagThethao.tsx'
-import { UpdateBlog } from '~/stores/features/blog/blog.slice.ts'
 import BlogByAccount from '~/pages/blog/BlogByAccount.tsx'
 import SearchDerail from '~/pages/blog/SearchDetail.tsx'
+import EditBlog from '~/pages/blog/Updatelog'
 export const PRIVATE_PATH = {
   home: '/',
   user: {
@@ -87,7 +87,7 @@ export const PRIVATE_ROUTES: IRoutes[] = [
   {
     name: 'UpdateBlog',
     path: 'blogUpdate/:id',
-    component: UpdateBlog,
+    component: CreateBlog,
     allowedRoles: [ROLE.ADMIN, ROLE.USER]
   },
   {
@@ -125,5 +125,5 @@ export const PRIVATE_ROUTES: IRoutes[] = [
     path: 'create',
     component: CreateBlog,
     allowedRoles: [ROLE.ADMIN, ROLE.USER]
-  },
+  }
 ]

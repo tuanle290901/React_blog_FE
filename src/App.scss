@@ -80,3 +80,37 @@
 * {
   scrollbar-width: thin;
 }
+
+.custom-file-upload {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload label {
+  border: 2px solid #3498db;
+  color: #3498db;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 12px;
+  display: inline-block;
+}
+
+.custom-file-upload label:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.custom-file-upload span {
+  margin-right: 5px;
+}
+
+/* Optional: Add additional styling as needed */
+.ck-editor__editable {
+  height: 600px !important;
+}

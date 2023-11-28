@@ -4,7 +4,7 @@ import { useAppDispatch } from '~/stores/hook.ts'
 import { LoginPayload } from '~/types/login-payload.ts'
 
 import { Button, Col, Form, Input, Row } from 'antd'
-import logo from '~/assets/images/logo.png'
+import logo from '~/assets/images/blog.png'
 
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 
@@ -21,7 +21,6 @@ const Index: React.FC = () => {
   const onKeyDown = (event: any) => {
     if (event.key === ' ') event.preventDefault()
   }
-
 
   const onFinish = async (formValues: LoginPayload) => {
     try {
@@ -40,7 +39,7 @@ const Index: React.FC = () => {
 
   return (
     <div className='login-container tw-pt-[15%]'>
-      <Row className='login-logo-container tw-h-[15%]' align='middle'>
+      <Row className='login-logo-container tw-h-[20%]' align='middle'>
         <Col xs={50} md={{ span: 15, offset: 4 }}>
           <div className='tw-flex tw-justify-center'>
             <img src={logo} alt='logo' className='tw-w-full' />
@@ -48,13 +47,11 @@ const Index: React.FC = () => {
         </Col>
       </Row>
 
-      <Row className='login-title-container tw-h-[12%]'>
-        <Col xs={24} md={{ span: 16, offset: 4 }}>
-          <div className='title-one tw-flex tw-items-center'>
+      <Row className='login-title-container tw-h-[12%] tw-flex tw-items-center tw-justify-center'>
+        <Col>
+          <div className='title-one tw-flex tw-items-center tw-justify-center'>
             <span>{t('auth.hello')}</span>
-            {/* <img src={iconHand} alt='' className='tw-ml-[10px]' /> */}
           </div>
-          <div className='title-two tw-mt-[10px]'>{t('auth.loginToSystem')}</div>
         </Col>
       </Row>
 
@@ -64,13 +61,14 @@ const Index: React.FC = () => {
           layout={'vertical'}
           name='loginForm'
           autoComplete='off'
-          labelCol={{ xs: 24, md: { span: 16, offset: 4 } }}
-          wrapperCol={{ xs: 24, md: { span: 16, offset: 4 } }}
+          // labelWrap={true}
+          labelCol={{ span: 12, offset: 6 }}
+          wrapperCol={{ span: 12, offset: 6 }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.username')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.username')}</div>}
             name='email'
             rules={[{ required: true, message: t('auth.fieldIsRequired') }]}
           >
@@ -78,7 +76,7 @@ const Index: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.password')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.password')}</div>}
             name='password'
             rules={[{ required: true, message: t('auth.fieldIsRequired') }]}
           >
@@ -88,15 +86,13 @@ const Index: React.FC = () => {
           {/*<Form.Item wrapperCol={{ xs: 24, md: { span: 16, offset: 4 } }}>*/}
           {/*  <div className='tw-text-end tw-text-sky-500'>{t('auth.forgotPassword')}</div>*/}
           {/*</Form.Item>*/}
-          <Form.Item wrapperCol={{ xs: 24, md: { span: 16, offset: 4 } }}>
+          <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
             <div className='tw-text-end tw-text-sky-500'>
-              <Link to='/auth/register'>
-              {t('auth.register')}
-              </Link>
+              <Link to='/auth/register'>{t('auth.register')}</Link>
             </div>
           </Form.Item>
 
-          <Form.Item wrapperCol={{ xs: 24, md: { span: 16, offset: 4 } }}>
+          <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
             <Button className='login-button tw-w-full tw-mt-4' type='primary' htmlType='submit'>
               {t('auth.login')}
             </Button>

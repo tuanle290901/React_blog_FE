@@ -8,7 +8,7 @@ export const getListBlog = async () => {
   }
 }
 
-export const getBlogById = async (id:number) => {
+export const getBlogById = async (id: any) => {
   try {
     return await HttpService.get(`/blog/account/${id}`)
   } catch (e) {
@@ -16,14 +16,14 @@ export const getBlogById = async (id:number) => {
   }
 }
 
-export const searchBlog = async (title:string) => {
+export const searchBlog = async (title: string) => {
   try {
     return await HttpService.get(`/blog/title/${title}`)
   } catch (e) {
     console.log(e)
   }
 }
-export const getBlogByAccount = async (id:number) => {
+export const getBlogByAccount = async (id: number) => {
   try {
     return await HttpService.get(`/blog/myblog/${id}`)
   } catch (e) {
@@ -66,11 +66,11 @@ export const getListTagCongnghe = async () => {
     console.log(e)
   }
 }
-export const GetBlogById = async (id: number) => {
+export const GetBlogById = async (id: any) => {
   try {
-    return await HttpService.get(`/blog/find/${id}`);
+    return await HttpService.get(`/blog/find/${id}`)
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 }
 export const GetTag = async () => {
@@ -89,7 +89,7 @@ export const GetPermissions = async () => {
   }
 }
 
-export const deleteBlog = async (id:number) => {
+export const deleteBlog = async (id: number) => {
   try {
     return await HttpService.get(`/blog/delete/${id}`)
   } catch (e) {
@@ -97,8 +97,7 @@ export const deleteBlog = async (id:number) => {
   }
 }
 
-
-export const AddBlog = async (payload: { image: string; description: string; title: string; content: string }) => {
+export const AddBlog = async (payload: any) => {
   try {
     return await HttpService.post('/blog/add', payload)
   } catch (e) {
@@ -106,19 +105,12 @@ export const AddBlog = async (payload: { image: string; description: string; tit
   }
 }
 
-export const UpdateBlog = async (
-  id: number,
-  payload: { image: string; description: string; title: string; content: string }
-) => {
+export const UpdateBlog = async (id: any, payload: any) => {
   try {
-    const response = await HttpService.post(`/blog/update/${id}`, payload);
-    return response.data;  // Assuming the response contains the updated blog post
+    const response = await HttpService.post(`/blog/update/${id}`, payload)
+    return response.data // Assuming the response contains the updated blog post
   } catch (error) {
-    console.error("Error updating blog:", error);
-    throw error;  // Propagate the error for handling in the calling code
+    console.error('Error updating blog:', error)
+    throw error // Propagate the error for handling in the calling code
   }
-
-
-};
-
-
+}

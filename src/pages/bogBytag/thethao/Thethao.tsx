@@ -52,7 +52,7 @@ const Thethao: React.FC = () => {
         {blogs.slice(0, 4).map((blog) => (
           <Col key={blog.id} xs={24} sm={12} md={16} lg={12} xl={6}>
             <Link to={`/blog/${blog.id}`} style={{ textDecoration: 'none' }}>
-              <Card hoverable style={{ width: '100%' }} cover={<img alt='example' src={blog.avatar} />}>
+              <Card hoverable style={{ width: '100%', height: 350 }} cover={<img alt='example' src={blog.avatar} />}>
                 <Meta title={blog.title} description={truncateText(blog.description, 20)} />
               </Card>
             </Link>

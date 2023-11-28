@@ -1,18 +1,20 @@
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
-import { GetTag, AddBlog, GetPermissions } from '~/stores/features/blog/blog.slice.ts'
-import { useEffect, useState } from 'react'
-import { Flex, Input, Button, Select } from 'antd'
+import { GetTag, AddBlog, GetPermissions, GetBlogById, UpdateBlog } from '~/stores/features/blog/blog.slice.ts'
+import { useEffect, useRef, useState } from 'react'
+import { Flex, Input, Button, Select, Image } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import './Style.css'
+import uploadIcon from '~/assets/images/upload.png'
 
 interface Tag {
   id: number
   name: string
 }
-interface Permissions{
+interface Permissions {
   id: number
   name: string
 }
@@ -25,14 +27,16 @@ const CreateBlog = () => {
   const [image, setImage] = useState(null)
   const [avatarUrl, setAvatarUrl] = useState('')
   const [imageUrl, setImageUrl] = useState('')
-  const { TextArea } = Input;
-  const navigate = useNavigate();
+  const { TextArea } = Input
+  const navigate = useNavigate()
   const [tags, setTags] = useState<Tag[]>([])
   const [permissions, setPermissions] = useState<Permissions[]>([])
 
+  const { id } = useParams()
   const { Option } = Select
   const [selectedTagId, setSelectedTagId] = useState<number | null>(null)
   const [selectedPermissionsId, setSelectedPermissionsId] = useState<number | null>(null)
+  const fileInputRef = useRef<any>(null)
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -51,13 +55,13 @@ const CreateBlog = () => {
             loader.imageData = base64Data
             return new Promise((resolve) => {
               resolve({ default: base64Data })
-            });
-          };
+            })
+          }
           reader.readAsDataURL(file)
           console.log(imageUrl)
           return new Promise((resolve) => {
             resolve({ default: image })
-          });
+          })
         } catch (error) {
           console.error('Error uploading image:', error)
           throw error
@@ -75,7 +79,6 @@ const CreateBlog = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => uploadAdapter(loader)
-
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -87,19 +90,18 @@ const CreateBlog = () => {
 
     const reader = new FileReader()
     reader.onloadend = () => {
-      const base64Data = reader.result;
+      const base64Data = reader.result
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setAvatar(base64Data)
-    };
+    }
     reader.readAsDataURL(file)
-  };
+  }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const handleEditorChange = (event, editor) => {
-
     setContent(editor.getData())
-  };
+  }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const handleTitleChange = (event) => {
@@ -123,18 +125,18 @@ const CreateBlog = () => {
   }
   const saveBlog = async (index: number) => {
     setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
-      newLoadings[index] = true;
-      return newLoadings;
-    });
+      const newLoadings = [...prevLoadings]
+      newLoadings[index] = true
+      return newLoadings
+    })
 
     setTimeout(() => {
       setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
-        newLoadings[index] = false;
-        return newLoadings;
-      });
-    }, 3000);
+        const newLoadings = [...prevLoadings]
+        newLoadings[index] = false
+        return newLoadings
+      })
+    }, 3000)
 
     try {
       const payload = {
@@ -144,20 +146,17 @@ const CreateBlog = () => {
         content: content,
         description: description,
         tag: { id: selectedTagId },
-        permissions: { id: selectedPermissionsId}
-      };
+        permissions: { id: selectedPermissionsId }
+      }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const response = await AddBlog(payload);
-
-      console.log(response)
-
-      // console.log(response.iamge);
-      navigate('../');
-
+      if (id) {
+        await UpdateBlog(id, payload)
+      } else {
+        await AddBlog(payload)
+      }
+      navigate('../')
     } catch (e) {
-      console.error(e);
+      console.error(e)
     }
   }
 
@@ -181,10 +180,44 @@ const CreateBlog = () => {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    const fetchData = async (id: any) => {
+      try {
+        const blogResponse: any = await GetBlogById(id)
+        setTitle(blogResponse.title)
+        setDescription(blogResponse.description)
+        setSelectedTagId(blogResponse.tag.id)
+        setSelectedPermissionsId(blogResponse.permissions.id)
+        setContent(blogResponse.content)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    if (id) {
+      fetchData(id)
+    }
+  }, [id])
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
+    }
+  }
+
   return (
-    <div className='App'>
-      <input type='file' accept='image/*' onChange={handleAvatarUpload} />
-      {avatar && <img src={avatar} alt='Avatar' style={{ width: '100px' }} />}
+    <div className='App container tw-mt-4'>
+      {avatar && (
+        <div className=' tw-flex tw-justify-center'>
+          <img src={avatar} alt='Avatar' style={{ height: 200 }} />
+        </div>
+      )}
+
+      <div className='custom-file-upload tw-flex tw-justify-center'>
+        <input type='file' ref={fileInputRef} accept='image/*' onChange={handleAvatarUpload} />
+        <label>
+          <Image height={30} src={uploadIcon} preview={false} alt='' onClick={handleButtonClick} />
+        </label>
+      </div>
       <Flex vertical gap={32}>
         <Input showCount maxLength={100} onChange={handleTitleChange} placeholder='Nhập Title' value={title} />
         <TextArea
@@ -201,7 +234,12 @@ const CreateBlog = () => {
             </Option>
           ))}
         </Select>
-        <Select placeholder='Chọn permissions' onChange={handlePermissionsChange} style={{ width: '100%' }} value={selectedPermissionsId}>
+        <Select
+          placeholder='Chọn permissions'
+          onChange={handlePermissionsChange}
+          style={{ width: '100%' }}
+          value={selectedPermissionsId}
+        >
           {permissions.map((permission) => (
             <Option key={permission.id} value={permission.id}>
               {permission.name}
@@ -210,21 +248,21 @@ const CreateBlog = () => {
         </Select>
       </Flex>
       <br />
-      <CKEditor
-        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-        // @ts-ignore
-        config={{
-          extraPlugins: [uploadPlugin],
-
-        }}
-
-        editor={ClassicEditor}
-        onChange={handleEditorChange}
-        data={content}
-      />
-      <Button style={{ width: '100%', height: 40 }} type='primary' loading={loadings[1]} onClick={() => saveBlog(1)}>
-        Tạo bài viết
-      </Button>
+      <div>
+        <CKEditor
+          config={{
+            extraPlugins: [uploadPlugin]
+          }}
+          editor={ClassicEditor}
+          onChange={handleEditorChange}
+          data={content}
+        />
+      </div>
+      <div className='tw-flex tw-justify-center tw-mt-3'>
+        <Button className='tw-w-[50%] ' type='primary' loading={loadings[1]} onClick={() => saveBlog(1)}>
+          Tạo bài viết
+        </Button>
+      </div>
     </div>
   )
 }

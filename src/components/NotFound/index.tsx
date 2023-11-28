@@ -13,7 +13,7 @@ const Index = () => {
         <Button
           type='primary'
           onClick={() => {
-            navigate(`timesheet`)
+            navigate(`/`)
           }}
         >
           Quay lại

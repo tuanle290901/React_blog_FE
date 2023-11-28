@@ -4,7 +4,7 @@ import { useAppDispatch } from '~/stores/hook.ts'
 import { LoginPayload, RegisterPayload } from '~/types/login-payload.ts'
 
 import { Button, Col, Form, Input, Row } from 'antd'
-import logo from '~/assets/images/logo.png'
+import logo from '~/assets/images/blog.png'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -40,7 +40,7 @@ const Index: React.FC = () => {
 
   return (
     <div className='login-container tw-pt-[1%]'>
-      <Row className='login-logo-container tw-h-[15%]' align='middle'>
+      <Row className='login-logo-container tw-h-[20%]' align='middle'>
         <Col xs={50} md={{ span: 15, offset: 4 }}>
           <div className='tw-flex tw-justify-center'>
             <img src={logo} alt='logo' className='tw-w-full' />
@@ -48,12 +48,11 @@ const Index: React.FC = () => {
         </Col>
       </Row>
 
-      <Row className='login-title-container tw-h-[5%]'>
-        <Col xs={24} md={{ span: 16, offset: 4 }}>
-          <div className='title-one tw-flex tw-items-center'>
-            {/* <img src={iconHand} alt='' className='tw-ml-[10px]' /> */}
+      <Row className='login-title-container tw-h-[12%] tw-flex tw-items-center tw-justify-center'>
+        <Col>
+          <div className='title-one tw-flex tw-items-center tw-justify-center'>
+            <span>Đăng ký thành viên</span>
           </div>
-          <div className='title-two tw-mt-[10px]'>{t('auth.registerSystem')}</div>
         </Col>
       </Row>
 
@@ -68,38 +67,44 @@ const Index: React.FC = () => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.username')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.username')}</div>}
             name='email'
-            rules={[{ required: true, message: t('auth.fieldIsRequired') }, { pattern: REGEX_EMAIL, message: 'Định dạng email không đùng' }]}
+            rules={[
+              { required: true, message: t('auth.fieldIsRequired') },
+              { pattern: REGEX_EMAIL, message: 'Định dạng email không đùng' }
+            ]}
           >
             <Input placeholder={t('auth.username')} className='login-input-custom' onKeyDown={onKeyDown} />
           </Form.Item>
 
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.password')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.password')}</div>}
             name='password'
             rules={[{ required: true, message: t('auth.fieldIsRequired') }]}
           >
             <Input.Password placeholder='Mật khẩu' className='login-input-custom' maxLength={32} />
           </Form.Item>
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.fullName')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.fullName')}</div>}
             name='name'
             rules={[{ required: true, message: t('auth.fieldIsRequired') }]}
           >
             <Input placeholder={t('auth.fullName')} className='login-input-custom' onKeyDown={onKeyDown} />
           </Form.Item>
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.address')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.address')}</div>}
             name='address'
             rules={[{ required: true, message: t('auth.fieldIsRequired') }]}
           >
             <Input placeholder={t('auth.address')} className='login-input-custom' onKeyDown={onKeyDown} />
           </Form.Item>
           <Form.Item
-            label={<div className='tw-font-semibold'>{t('auth.phoneNumber')}</div>}
+            // label={<div className='tw-font-semibold'>{t('auth.phoneNumber')}</div>}
             name='phone'
-            rules={[{ required: true, message: t('auth.fieldIsRequired') }, { pattern: REGEX_PHONE_NUMBER, message: 'Định dạng sđt không đùng' }]}
+            rules={[
+              { required: true, message: t('auth.fieldIsRequired') },
+              { pattern: REGEX_PHONE_NUMBER, message: 'Định dạng sđt không đùng' }
+            ]}
           >
             <Input placeholder={t('auth.phoneNumber')} className='login-input-custom' onKeyDown={onKeyDown} />
           </Form.Item>
